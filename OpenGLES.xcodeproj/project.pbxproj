@@ -16,6 +16,10 @@
 		EB6244981D6DA3C8007C6909 /* OpenGLESTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6244971D6DA3C8007C6909 /* OpenGLESTests.m */; };
 		EB6244A31D6DA3C8007C6909 /* OpenGLESUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6244A21D6DA3C8007C6909 /* OpenGLESUITests.m */; };
 		EB6244B11D6E82D9007C6909 /* leaves.gif in Resources */ = {isa = PBXBuildFile; fileRef = EB6244B01D6E82D9007C6909 /* leaves.gif */; };
+		EBBC816A1D87D23300C0152B /* ZXWView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC81691D87D23300C0152B /* ZXWView.m */; };
+		EBBC816D1D87D2EF00C0152B /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC816C1D87D2EF00C0152B /* TriangleView.m */; };
+		EBBC81701D87DE3C00C0152B /* RectangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC816F1D87DE3C00C0152B /* RectangleView.m */; };
+		EBBC81731D87E02800C0152B /* CubeView.m in Sources */ = {isa = PBXBuildFile; fileRef = EBBC81721D87E02800C0152B /* CubeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,14 @@
 		EB6244A21D6DA3C8007C6909 /* OpenGLESUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OpenGLESUITests.m; sourceTree = "<group>"; };
 		EB6244A41D6DA3C8007C6909 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EB6244B01D6E82D9007C6909 /* leaves.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = leaves.gif; sourceTree = "<group>"; };
+		EBBC81681D87D23300C0152B /* ZXWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXWView.h; sourceTree = "<group>"; };
+		EBBC81691D87D23300C0152B /* ZXWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXWView.m; sourceTree = "<group>"; };
+		EBBC816B1D87D2EF00C0152B /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		EBBC816C1D87D2EF00C0152B /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		EBBC816E1D87DE3C00C0152B /* RectangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectangleView.h; sourceTree = "<group>"; };
+		EBBC816F1D87DE3C00C0152B /* RectangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RectangleView.m; sourceTree = "<group>"; };
+		EBBC81711D87E02800C0152B /* CubeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeView.h; sourceTree = "<group>"; };
+		EBBC81721D87E02800C0152B /* CubeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,14 @@
 				EB6244B01D6E82D9007C6909 /* leaves.gif */,
 				EB62448E1D6DA3C8007C6909 /* Info.plist */,
 				EB62447D1D6DA3C8007C6909 /* Supporting Files */,
+				EBBC81681D87D23300C0152B /* ZXWView.h */,
+				EBBC81691D87D23300C0152B /* ZXWView.m */,
+				EBBC816B1D87D2EF00C0152B /* TriangleView.h */,
+				EBBC816C1D87D2EF00C0152B /* TriangleView.m */,
+				EBBC816E1D87DE3C00C0152B /* RectangleView.h */,
+				EBBC816F1D87DE3C00C0152B /* RectangleView.m */,
+				EBBC81711D87E02800C0152B /* CubeView.h */,
+				EBBC81721D87E02800C0152B /* CubeView.m */,
 			);
 			path = OpenGLES;
 			sourceTree = "<group>";
@@ -274,7 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBBC81731D87E02800C0152B /* CubeView.m in Sources */,
+				EBBC81701D87DE3C00C0152B /* RectangleView.m in Sources */,
+				EBBC816A1D87D23300C0152B /* ZXWView.m in Sources */,
 				EB6244851D6DA3C8007C6909 /* ViewController.m in Sources */,
+				EBBC816D1D87D2EF00C0152B /* TriangleView.m in Sources */,
 				EB6244821D6DA3C8007C6909 /* AppDelegate.m in Sources */,
 				EB62447F1D6DA3C8007C6909 /* main.m in Sources */,
 			);
