@@ -42,9 +42,41 @@ static const RectangleVertex verticesForRectangle[] = {
     {-0.5f,  0.5f, 0.0f},
 };
 
+static const RectangleVertex verticesForCube[] = {
+    {-0.5f, -0.5f,  0.0f},
+    { 0.5f, -0.5f,  0.0f},
+    { 0.5f,  0.5f,  0.0f},
+    {-0.5f,  0.5f,  0.0f},
+    {-0.5f, -0.5f, -0.5f},
+    { 0.5f, -0.5f, -0.5f},
+    { 0.5f,  0.5f, -0.5f},
+    {-0.5f,  0.5f, -0.5f},
+};
+static const GLbyte indexs[] = {
+    //front
+    0, 1, 2,
+    2, 3, 0,
+    //back
+    4, 5, 6,
+    6, 7, 4,
+    //left
+    0, 4, 7,
+    7, 3, 0,
+    //right
+    2, 5, 6,
+    6, 3, 2,
+    //top
+    3, 2, 6,
+    6, 7, 3,
+    //bottom
+    0, 1, 5,
+    5, 4, 0
+};
+
 @interface ViewController ()
 
 @property (nonatomic, assign) DrawType              drawType;
+@property (nonatomic, assign) float                 rotation;
 
 @end
 
@@ -54,7 +86,9 @@ static const RectangleVertex verticesForRectangle[] = {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.drawType = DrawTypeRectangle;
+    self.drawType = DrawTypeCube;
+    
+    self.delegate = self;
     
     [self __initContext];
     [self __init__];
@@ -71,6 +105,22 @@ static const RectangleVertex verticesForRectangle[] = {
     [self __draw__];
 }
 
+#pragma mark - GLKViewControllerDelegate
+
+- (void)glkViewControllerUpdate:(GLKViewController *)controller {
+    if (_drawType == DrawTypeCube) {
+        float aspect = fabs(CGRectGetWidth(self.view.bounds) / CGRectGetHeight(self.view.bounds));
+        GLKMatrix4 projectMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+        self.baseEffect.transform.projectionMatrix = projectMatrix;
+        
+        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -5.5f);
+        modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+        self.baseEffect.transform.modelviewMatrix = modelViewMatrix;
+        
+        _rotation += self.timeSinceLastUpdate * 0.5f;
+    }
+}
+
 - (void)dealloc {
     GLKView *view = (GLKView *)self.view;
     [EAGLContext setCurrentContext:view.context];
@@ -79,6 +129,12 @@ static const RectangleVertex verticesForRectangle[] = {
         glDeleteBuffers(1, &vertexBufferID);
         
         vertexBufferID = 0;
+    }
+    
+    if (indexBufferID != 0) {
+        glDeleteBuffers(1, &indexBufferID);
+        
+        indexBufferID = 0;
     }
     
 //    ((GLKView *)self.view).context = nil;
@@ -124,7 +180,6 @@ static const RectangleVertex verticesForRectangle[] = {
 #pragma mark - Draw Triangle
 
 - (void)__initDrawTriangle {
-    
     glGenBuffers(1, &vertexBufferID);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verticesWithTexture), verticesWithTexture, GL_STATIC_DRAW);
@@ -180,11 +235,34 @@ static const RectangleVertex verticesForRectangle[] = {
 #pragma mark - Draw Cube
 
 - (void)__initDrawCube {
+    ((GLKView *)self.view).drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+    self.baseEffect = [[GLKBaseEffect alloc] init];
+    self.baseEffect.useConstantColor = GL_TRUE;
+    self.baseEffect.constantColor = GLKVector4Make(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    glGenBuffers(1, &vertexBufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(verticesForCube), verticesForCube, GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &indexBufferID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexs), indexs, GL_STATIC_DRAW);
 }
 
 - (void)__drawCube {
+    [self.baseEffect prepareToDraw];
+    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    glEnable(GL_DEPTH_TEST);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferID);
+    glEnableVertexAttribArray(GLKVertexAttribPosition);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_TRUE, sizeof(RectangleVertex), NULL);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferID);
+    glDrawElements(GL_TRIANGLE_STRIP, sizeof(indexs) / sizeof(indexs[0]), GL_UNSIGNED_BYTE, (void *)0);
 }
 
 @end
