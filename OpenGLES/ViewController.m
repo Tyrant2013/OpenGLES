@@ -155,6 +155,16 @@ typedef NS_ENUM(NSUInteger, DrawType) {
         case DrawTypeCube:
             self.delegate = self;
 //            [self __initDrawCube];
+            
+//            _rotation = 0.8f;
+//            float aspect = fabs(CGRectGetWidth(self.view.bounds) / CGRectGetHeight(self.view.bounds));
+//            GLKMatrix4 projectMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
+//            self.cubeView.baseEffect.transform.projectionMatrix = projectMatrix;
+//            
+//            GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, -5.5f);
+//            modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
+//            self.cubeView.baseEffect.transform.modelviewMatrix = modelViewMatrix;
+            
             [self.cubeView setup];
             break;
     }

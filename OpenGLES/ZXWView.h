@@ -12,6 +12,7 @@
 @interface ZXWView : NSObject {
     GLuint vertexBufferID;
     GLuint indexBufferID;
+    GLuint colorBufferID;
 }
 
 @property (nonatomic, strong) GLKBaseEffect                 *baseEffect;

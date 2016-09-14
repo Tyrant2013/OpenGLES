@@ -8,7 +8,9 @@
 
 #import "ZXWView.h"
 
-@interface CubeView : ZXWView
+@interface CubeView : ZXWView {
+    GLuint colorIndexBufferID;
+}
 
 @property (nonatomic, assign) float                         rotation;
 
